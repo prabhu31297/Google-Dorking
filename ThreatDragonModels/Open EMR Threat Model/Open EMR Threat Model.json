@@ -38,6 +38,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -121,7 +122,6 @@
               ]
             },
             "id": "d747ca01-c5b7-4aba-ac71-550064ba2372",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "Patient",
@@ -154,6 +154,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -237,7 +238,6 @@
               ]
             },
             "id": "d64ebe61-688c-4593-8de3-985486b6396c",
-            "zIndex": 2,
             "data": {
               "type": "tm.Actor",
               "name": "Doctor",
@@ -263,13 +263,14 @@
                 "text": "system\n Administrator"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -353,16 +354,33 @@
               ]
             },
             "id": "9d71db38-9e56-4027-a7ad-1dd99fb3b7bd",
-            "zIndex": 3,
             "data": {
               "type": "tm.Actor",
               "name": "system\n Administrator",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "b85758c5-ad55-4a18-95a8-f6d9322fa644",
+                  "title": "Privilege Abuse by System Admin",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "A system admin may access or alter records without business justification.",
+                  "mitigation": "\tImplement audit trails for admin actions\n\t•\tApply least privilege principle",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": "4"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -386,6 +404,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -469,7 +488,6 @@
               ]
             },
             "id": "8875992c-5d99-4ac2-8bb1-e4623d9c0d0c",
-            "zIndex": 4,
             "data": {
               "type": "tm.Actor",
               "name": "Insurance \nProvider",
@@ -491,14 +509,18 @@
               "height": 60
             },
             "attrs": {
+              "text": {
+                "text": "Login \nAuthentication"
+              },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -582,16 +604,40 @@
               ]
             },
             "id": "772ae124-be3d-451c-92e4-70b858bfbe2b",
-            "zIndex": 5,
             "data": {
               "type": "tm.Actor",
-              "name": "Actor",
+              "name": "Login \nAuthentication",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "8828a4ba-ad87-457e-bfa1-ca0c571d8ae1",
+                  "title": "Sessions Never Expire",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "Sessions remain active indefinitely, enabling session hijacking if credentials are stolen.",
+                  "mitigation": "\t•\tImplement session timeout\n\t•\tInvalidate tokens after logout",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": "5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -608,13 +654,14 @@
                 "text": "appointments \nManager"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -698,16 +745,33 @@
               ]
             },
             "id": "db4b9bde-2dfe-4e20-983c-f15edb4f652b",
-            "zIndex": 6,
             "data": {
               "type": "tm.Actor",
               "name": "appointments \nManager",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "5de9aaef-d2d5-46d5-9f14-fc1c2a440fbc",
+                  "title": "Cross-Site Scripting in Appointment Manager",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "XSS in Appointment Notes, Malicious JavaScript in appointment descriptions can execute in a doctor’s browser.",
+                  "mitigation": "•\tSanitize all user inputs\n•\tUse Content Security Policy (CSP)",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": "7"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -731,6 +795,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 7,
             "ports": {
               "groups": {
                 "top": {
@@ -814,7 +879,6 @@
               ]
             },
             "id": "8c4dc7ba-87f1-49d9-82bf-6811c2eb1ae9",
-            "zIndex": 7,
             "data": {
               "type": "tm.Actor",
               "name": "MY SQL\nDatabase\n(patient records)",
@@ -840,13 +904,14 @@
                 "text": "Medical\nRecords\nService"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 8,
             "ports": {
               "groups": {
                 "top": {
@@ -930,19 +995,53 @@
               ]
             },
             "id": "2fa13367-ce7b-4e95-b02d-65c90aa099cd",
-            "zIndex": 8,
             "data": {
               "type": "tm.Process",
               "name": "Medical\nRecords\nService",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "61643b19-924f-46ae-8a71-85f47689dee7",
+                  "title": "Unauthorized Access to Medical Records",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Elevation of privilege",
+                  "description": " A doctor or user can access patient records they shouldn’t have permission to view",
+                  "mitigation": "Implement RBAC (Role-Based Access Control)\nRegularly audit access controls",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": "6"
+                },
+                {
+                  "id": "d18fc834-14d4-4c55-a77a-380593dfc126",
+                  "title": " Unauthorized Access to Medical API",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": " Internal APIs lack authentication, allowing attackers to forge requests.",
+                  "mitigation": "•\tRequire API key or token authentication\n\t•\tImplement IP whitelisting or mTLS",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": "8"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 1
+              }
             },
             "children": [
               "e32e2c24-0433-483d-9725-0beb12f53c5b"
@@ -969,6 +1068,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 9,
             "ports": {
               "groups": {
                 "top": {
@@ -1052,7 +1152,6 @@
               ]
             },
             "id": "e7785407-4614-4a01-bc73-595cd9500a5d",
-            "zIndex": 9,
             "data": {
               "type": "tm.Actor",
               "name": "Prescription\nService/Team",
@@ -1085,6 +1184,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 10,
             "ports": {
               "groups": {
                 "top": {
@@ -1168,7 +1268,6 @@
               ]
             },
             "id": "6754dc7b-09f2-47ad-9f5a-6e97764f44a6",
-            "zIndex": 10,
             "data": {
               "type": "tm.Actor",
               "name": "Billing &\nPayment \nservice",
@@ -1215,6 +1314,7 @@
               ""
             ],
             "id": "e32e2c24-0433-483d-9725-0beb12f53c5b",
+            "parent": "2fa13367-ce7b-4e95-b02d-65c90aa099cd",
             "source": {
               "cell": "2fa13367-ce7b-4e95-b02d-65c90aa099cd",
               "port": "665d2c90-96c2-411a-b0cd-18d812db37c4"
@@ -1223,14 +1323,14 @@
               "cell": "2fa13367-ce7b-4e95-b02d-65c90aa099cd",
               "port": "665d2c90-96c2-411a-b0cd-18d812db37c4"
             },
-            "vertices": [],
-            "parent": "2fa13367-ce7b-4e95-b02d-65c90aa099cd"
+            "vertices": []
           },
           {
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1250,12 +1350,31 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "1b051c63-ddee-43d4-8754-361d25a1fe74",
+                  "title": "SQL Injection in Login Process",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "An attacker may input SQL code through the login form to bypass authentication ",
+                  "mitigation": "-Use parameterized queries or ORM frameworks\n-Sanitize and validate all input fields\n-Implement Web Application Firewall (WAF)",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 2,
+                  "score": "8"
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 2,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "credentials"
@@ -1268,18 +1387,25 @@
             "target": {
               "cell": "772ae124-be3d-451c-92e4-70b858bfbe2b",
               "port": "2d4a4342-c4c9-45fb-942a-639ac9273b6f"
-            }
+            },
+            "vertices": [
+              {
+                "x": 190,
+                "y": 140
+              }
+            ]
           },
           {
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": ""
+                  "name": "block"
                 },
                 "strokeDasharray": null
               }
@@ -1294,12 +1420,31 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
+              "hasOpenThreats": true,
+              "isBidirectional": true,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "1d1bb744-ebb9-486a-89c7-1e9a7830252c",
+                  "title": "Unencrypted Data Transmission",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "User credentials are sent without encryption, allowing attackers to intercept them.\n",
+                  "mitigation": "Use HTTPS for all communications\nEnforce TLS 1.2 or higher",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 3,
+                  "score": "7"
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "sends credentials"
@@ -1312,7 +1457,13 @@
             "target": {
               "cell": "772ae124-be3d-451c-92e4-70b858bfbe2b",
               "port": "2d4a4342-c4c9-45fb-942a-639ac9273b6f"
-            }
+            },
+            "vertices": [
+              {
+                "x": 190,
+                "y": 260
+              }
+            ]
           },
           {
             "shape": "flow",
@@ -1334,7 +1485,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Data Flow",
+              "name": "",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -1346,7 +1497,7 @@
               "threats": []
             },
             "labels": [
-              "Data Flow"
+              ""
             ],
             "id": "b0ebb7ea-b548-474f-a43d-7a3b12c64c28",
             "source": {
@@ -1877,13 +2028,14 @@
                 "text": "Payment \nGateway"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -1967,16 +2119,33 @@
               ]
             },
             "id": "115902a6-af44-4bdf-8cef-14ac7014623e",
-            "zIndex": 11,
             "data": {
               "type": "tm.Actor",
               "name": "Payment \nGateway",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "556e9933-93e7-489e-8b94-a57f22fdb24d",
+                  "title": "Replay of Previous Payment Request",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Repudiation",
+                  "description": "An attacker reuses a previous payment request to trigger duplicate payments.",
+                  "mitigation": "\n\t•\tUse nonce values and timestamps\n\t•\tValidate all requests for uniqueness",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": "5"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "repudiation": 1
+              }
             }
           },
           {
@@ -1993,13 +2162,14 @@
                 "text": "Audit Logs"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 12,
             "ports": {
               "groups": {
                 "top": {
@@ -2083,16 +2253,33 @@
               ]
             },
             "id": "053eae1c-a63e-470f-8d81-d3cf78beb7fe",
-            "zIndex": 12,
             "data": {
               "type": "tm.Actor",
               "name": "Audit Logs",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "c4492402-4bc0-4760-9895-b3674688dab1",
+                  "title": " Insecure Logging of Sensitive Info",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "Sensitive data such as passwords or tokens are logged insecurely in audit logs.",
+                  "mitigation": "•Mask or omit sensitive values in logs\nRestrict access to log",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": "6"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           }
         ]
@@ -2100,6 +2287,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 0
+    "threatTop": 10
   }
 }
